@@ -1,12 +1,12 @@
 <template>
   <div class="login">
     <div class="login-container">
-      <div class="login-image" :style="{ 'background-image': 'url(' + loginBackground + ')' }">
+      <!-- <div class="login-image" :style="{ 'background-image': 'url(' + loginBackground + ')' }">
         <div class="photo-credit">
           <h4>Danang - Vietnam</h4>
           <span>Photo by Kiril Dobrev on Unsplash</span>
         </div>
-      </div>
+      </div> -->
       <div class="login-content">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
           <div class="title-wrap">
@@ -17,7 +17,7 @@
             >
             <h3 class="title">
               {{ $t('login.title') }}
-              <lang-select class="set-language" />
+              <!-- <lang-select class="set-language" /> -->
             </h3>
           </div>
           <el-form-item prop="email">
@@ -47,10 +47,10 @@
               {{ $t('login.logIn') }}
             </el-button>
           </el-form-item>
-          <div class="tips">
+          <!-- <div class="tips">
             <span style="margin-right:20px;">Email: admin@laravue.dev</span>
             <span>Password: laravue</span>
-          </div>
+          </div> -->
         </el-form>
       </div>
     </div>
@@ -58,15 +58,15 @@
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect';
+// import LangSelect from '@/components/LangSelect';
 import { validEmail } from '@/utils/validate';
 import { csrf } from '@/api/auth';
-import logo from '@/assets/login/logo.png';
+import logo from '@/assets/login/logo2.png';
 import loginBackground from '@/assets/login/login_background.jpg';
 
 export default {
   name: 'Login',
-  components: { LangSelect },
+  // components: { LangSelect },
   data() {
     const validateEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
@@ -84,8 +84,10 @@ export default {
     };
     return {
       loginForm: {
-        email: 'admin@laravue.dev',
-        password: 'laravue',
+        // email: 'admin@laravue.dev',
+        // password: 'laravue',
+        email: '',
+        password: '',
       },
       loginRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],
@@ -121,6 +123,7 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
+        console.log({ valid });
         if (valid) {
           this.loading = true;
           csrf().then(() => {
@@ -208,18 +211,15 @@ $textColor:#eee;
 
   .login-container {
     background: $bg;
-    width: 1120px;
-    min-height: 590px;
-    display: grid;
     grid-template-columns: auto 480px;
     transition: all .3s ease-in-out;
     transform: scale(1);
 
     .logo {
       display: block;
-      width: 80px;
-      height: 80px;
-      margin-bottom: 20px;
+      width: 307px;
+      height: 180px;
+      margin-bottom: 0px;
     }
 
     .login-image {
@@ -246,7 +246,7 @@ $textColor:#eee;
 
     .login-form {
       min-width: 320px;
-      padding: 130px 60px;
+      padding: 30px;
       position: relative;
       opacity: 1;
       transition: opacity .3s ease-in-out,padding .2s ease-in-out;
@@ -276,7 +276,7 @@ $textColor:#eee;
         font-size: 24px;
         color: $textColor;
         margin: 0px auto 10px auto;
-        text-align: left;
+        text-align: center;
         font-weight: bold;
       }
       .sub-heading {
